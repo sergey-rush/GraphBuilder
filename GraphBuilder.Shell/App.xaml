@@ -1,0 +1,13 @@
+﻿<Application x:Class="GraphBuilder.Shell.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Exit="Application_Exit">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/GraphBuilder.Shell;component/Resources/Application.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/GraphBuilder.Shell;component/Resources/ZoomBox.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

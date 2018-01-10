@@ -1,0 +1,278 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Windows.Forms;
+using System.Windows.Input;
+using System.Windows.Media.Imaging;
+using System.Xml;
+using GraphBuilder.Core;
+using GraphBuilder.Shell.Common;
+using GraphBuilder.Shell.Models;
+using GraphBuilder.Shell.Views;
+
+
+namespace GraphBuilder.Shell.ViewModels
+{
+    public class FileViewModel : ViewModelBase
+    {
+        private Bootstrap _bootstrap;
+
+        public FileViewModel(Bootstrap bootstrap)
+        {
+            _bootstrap = bootstrap;
+        }
+
+        #region Commands
+
+        private DelegateCommand _newDocument;
+
+        public ICommand NewDocument
+        {
+            get
+            {
+                if (_newDocument == null)
+                {
+                    _newDocument = new DelegateCommand(OnNewDocument);
+                }
+                return _newDocument;
+            }
+        }
+
+        public void OnNewDocument()
+        {
+            DocumentViewModel document = new DocumentViewModel();
+            document.Title = String.Format("Документ{0}", _bootstrap.MainViewModel.Documents.Count + 1);
+            _bootstrap.MainViewModel.Documents.Add(document);
+            _bootstrap.MainViewModel.ActiveContent = document;
+        }
+
+        private DelegateCommand _openDocument;
+
+        public ICommand OpenDocument
+        {
+            get
+            {
+                if (_openDocument == null)
+                {
+                    _openDocument = new DelegateCommand(OnOpenDocument);
+                }
+                return _openDocument;
+            }
+        }
+
+        public void OnOpenDocument()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "XML Files|*.xml";
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string selectedFile = openFileDialog.FileName;
+            }
+
+            //DocumentViewModel document = new DocumentViewModel();
+            //document.Title = String.Format("Документ{0}", _bootstrap.MainViewModel.Documents.Count + 1);
+            //_bootstrap.MainViewModel.Documents.Add(document);
+        }
+
+        private DelegateCommand _saveDocument;
+
+        public ICommand SaveDocument
+        {
+            get
+            {
+                if (_saveDocument == null)
+                {
+                    _saveDocument = new DelegateCommand(OnSaveDocument);
+                }
+                return _saveDocument;
+            }
+        }
+
+        public void OnSaveDocument()
+        {
+            using(SaveFileDialog dlg = new SaveFileDialog())
+            {
+                dlg.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                dlg.RestoreDirectory = true;
+                dlg.FileName = "Document.xml";
+                dlg.DefaultExt = ".xml";
+                dlg.Filter = "Xml files (*.xml)|*.xml|All files (*.*)|*.*";
+                DialogResult result = dlg.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    DocumentViewModel documentModel = (DocumentViewModel)_bootstrap.MainViewModel.ActiveContent;
+                    Document document = new Document();
+                    //document.Nodes = documentModel.VirtualCanvas.Nodes;
+                    //document.Links = documentModel.VirtualCanvas.Links;
+                    string filename = dlg.FileName;
+                    string text = document.SerializeToXml();
+
+                    XmlDocument xdoc = new XmlDocument();
+                    xdoc.LoadXml(text);
+                    xdoc.Save(filename);
+                }
+            }
+        }
+
+        private DelegateCommand _select;
+
+        public ICommand Select
+        {
+            get
+            {
+                if (_select == null)
+                {
+                    _select = new DelegateCommand(OnSelect);
+                }
+                return _select;
+            }
+        }
+
+        public void OnSelect()
+        {
+            _bootstrap.MouseMode = MouseMode.Dragging;
+        }
+        
+        private DelegateCommand _openDataTable;
+
+        public ICommand OpenDataTable
+        {
+            get
+            {
+                if (_openDataTable == null)
+                {
+                    _openDataTable = new DelegateCommand(OnOpenDataTable);
+                }
+                return _openDataTable;
+            }
+        }
+
+        public void OnOpenDataTable()
+        {
+            DocumentViewModel document = (DocumentViewModel)_bootstrap.MainViewModel.ActiveContent;
+            DataTableViewModel dataViewModel = new DataTableViewModel(document);
+            DataTableWindow dataTableWindow = new DataTableWindow { Owner = _bootstrap.MainViewModel.ShellWindow };
+            dataTableWindow.DataContext = dataViewModel;
+            dataTableWindow.ShowDialog();
+        }
+
+        private DelegateCommand _openSettings;
+
+        public ICommand OpenSettings
+        {
+            get
+            {
+                if (_openSettings == null)
+                {
+                    _openSettings = new DelegateCommand(OnOpenSettings);
+                }
+                return _openSettings;
+            }
+        }
+
+        public void OnOpenSettings()
+        {
+            SettingsWindow settingsWindow = new SettingsWindow { Owner = _bootstrap.MainViewModel.ShellWindow };
+            settingsWindow.ShowDialog();
+        }
+
+        private DelegateCommand _openStartPage;
+
+        public ICommand OpenStartPage
+        {
+            get
+            {
+                if (_openStartPage == null)
+                {
+                    _openStartPage = new DelegateCommand(OnOpenStartPage);
+                }
+                return _openStartPage;
+            }
+        }
+
+        public void OnOpenStartPage()
+        {
+            StartPageViewModel document = new StartPageViewModel();
+            _bootstrap.MainViewModel.Documents.Add(document);
+        }
+
+
+        private DelegateCommand _openIcons;
+
+        public ICommand OpenIcons
+        {
+            get
+            {
+                if (_openIcons == null)
+                {
+                    _openIcons = new DelegateCommand(OnOpenIcons);
+                }
+                return _openIcons;
+            }
+        }
+
+        public void OnOpenIcons()
+        {
+            ImageWindow imageWindow = new ImageWindow { Owner = _bootstrap.MainViewModel.ShellWindow };
+            imageWindow.ShowDialog();
+        }
+
+        private DelegateCommand _openDataType;
+
+        public ICommand OpenDataType
+        {
+            get
+            {
+                if (_openDataType == null)
+                {
+                    _openDataType = new DelegateCommand(OnOpenDataType);
+                }
+                return _openDataType;
+            }
+        }
+
+        public void OnOpenDataType()
+        {
+            SemanticTypesWindow dataTypeWindow = new SemanticTypesWindow();
+            dataTypeWindow.ShowDialog();
+        }
+
+        #endregion
+
+
+        private Thumb _selectedImage;
+        public Thumb SelectedImage
+        {
+            get { return _selectedImage; }
+            set
+            {
+                _selectedImage = value;
+                OnPropertyChanged("SelectedImage");
+            }
+        }
+
+        private List<Thumb> _categories = new List<Thumb>();
+        public List<Thumb> Categories
+        {
+            get { return _categories; }
+            set
+            {
+                _categories = value;
+                OnPropertyChanged("Categories");
+            }
+        }
+
+        private ObservableCollection<Thumb> _images = new ObservableCollection<Thumb>();
+        public ObservableCollection<Thumb> Images
+        {
+            get { return _images; }
+            set
+            {
+                _images = value;
+                OnPropertyChanged("Images");
+            }
+        }
+    }
+}

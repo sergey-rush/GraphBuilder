@@ -1,0 +1,424 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Globalization;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Effects;
+using System.Windows.Shapes;
+using System.Xml.Serialization;
+using GraphBuilder.Shell.ViewModels;
+
+namespace GraphBuilder.Shell.Models
+{
+    [SerializableAttribute()]
+    [XmlType(AnonymousType = true)]
+    [DisplayName("Связь")]
+    [Description("Имя объекта")]
+    public class Link : Element
+    {
+        public string Id { get; set; }
+
+        [Browsable(false)]
+        public ElementState ElementState { get; set; }
+
+        public Canvas LabelCanvas { get; private set; }
+        public Canvas StartArrowCanvas { get; private set; }
+        public Canvas EndArrowCanvas { get; private set; }
+
+        private ArrowEnds _arrowEnds;
+
+        [Category("Вид")]
+        [DisplayName("Стрелка"), Description("Указывает, какой конец линии имеет стрелку")]
+        public ArrowEnds ArrowEnds
+        {
+            get { return _arrowEnds; }
+            set
+            {
+                if (_arrowEnds != value)
+                {
+                    _arrowEnds = value;
+                    SetArrowEnd(_arrowEnds);
+                }
+            }
+        }
+
+        public void SetArrowEnd(ArrowEnds arrowEnds)
+        {
+            if (Line != null)
+            {
+                if (arrowEnds == ArrowEnds.Start)
+                {
+                    EndArrowCanvas.Children.Clear();
+                    StartArrowCanvas.Children.Clear();
+                    DrawArrow(StartArrowCanvas, EndSymbol.FilledTriangle, StartPoint, EndPoint);
+                }
+
+                if (arrowEnds == ArrowEnds.End)
+                {
+                    EndArrowCanvas.Children.Clear();
+                    StartArrowCanvas.Children.Clear();
+                    DrawArrow(EndArrowCanvas, EndSymbol.FilledTriangle, EndPoint, StartPoint);
+                }
+
+                if (arrowEnds == ArrowEnds.Both)
+                {
+                    EndArrowCanvas.Children.Clear();
+                    StartArrowCanvas.Children.Clear();
+                    DrawArrow(StartArrowCanvas, EndSymbol.FilledTriangle, StartPoint, EndPoint);
+                    DrawArrow(EndArrowCanvas, EndSymbol.FilledTriangle, EndPoint, StartPoint);
+                }
+
+                if (arrowEnds == ArrowEnds.None)
+                {
+                    EndArrowCanvas.Children.Clear();
+                    StartArrowCanvas.Children.Clear();
+                }
+            }
+        }
+
+        private void DrawArrow(Canvas canvas, EndSymbol symbol, Point headPoint, Point endPoint)
+        {
+            Point startPoint = new Point(headPoint.X - 20, headPoint.Y-20);
+
+            Point centerPoint = new Point(startPoint.X, startPoint.Y);
+            Point leftPoint = new Point(startPoint.X - 5, startPoint.Y - 10);
+            Point rightPoint = new Point(startPoint.X + 5, startPoint.Y - 10);
+            Point backPoint = new Point(startPoint.X, startPoint.Y - 20);
+
+            Path path = new Path();
+            PathFigure pathFigure = new PathFigure();
+            pathFigure.StartPoint = leftPoint;
+            pathFigure.IsClosed = true;
+            pathFigure.IsFilled = true;
+            path.Fill = Brushes.Black;
+
+            PathSegment segment = new LineSegment(centerPoint, true);
+            pathFigure.Segments.Add(segment);
+
+            segment = new LineSegment(rightPoint, true);
+            pathFigure.Segments.Add(segment);
+
+            if (symbol == EndSymbol.SimpleArrow)
+            {
+                pathFigure.IsClosed = false;
+                pathFigure.IsFilled = false;
+            }
+            else if (symbol == EndSymbol.EmptyTriangle)
+            {
+                path.Fill = Brushes.White;
+            }
+            else if (symbol == EndSymbol.FilledTriangle)
+            {
+                path.Fill = Brushes.Black;
+            }
+            else if (symbol == EndSymbol.EmptyRhombus)
+            {
+                segment = new LineSegment(backPoint, true);
+                pathFigure.Segments.Add(segment);
+                path.Fill = Brushes.White;
+            }
+            else if (symbol == EndSymbol.FilledRhumbus)
+            {
+                segment = new LineSegment(backPoint, true);
+                pathFigure.Segments.Add(segment);
+                path.Fill = Brushes.Black;
+            }
+
+            double degree = -90;
+
+            if (endPoint.Y != startPoint.Y)
+            {
+                double m = (startPoint.X - endPoint.X) / (startPoint.Y - endPoint.Y);
+
+                m = -m;
+                degree = Math.Atan(m) * 180 / Math.PI;
+
+                if (startPoint.Y - endPoint.Y < 0)
+                {
+                    degree += 180;
+                }
+            }
+            else if (endPoint.X > startPoint.X)
+            {
+                degree = 90;
+            }
+            Debug.WriteLine("Degree: {0}", degree);
+            path.RenderTransform = new RotateTransform(degree, centerPoint.X, centerPoint.Y);
+
+            PathFigureCollection figures = new PathFigureCollection();
+            figures.Add(pathFigure);
+
+            path.Data = new PathGeometry(figures, FillRule.Nonzero, Transform.Identity);
+
+            path.Stroke = Brushes.Black;
+            path.StrokeThickness = 1;
+
+            canvas.Children.Add(path);
+        }
+
+        private Color _lineColor = Colors.Black;
+        [Category("Вид")]
+        [DisplayName("Цвет связи"), Description("Задает цвет линии")]
+        public Color LineColor
+        {
+            get { return _lineColor; }
+            set
+            {
+                if (_lineColor != value)
+                {
+                    _lineColor = value;
+                    SetShapeColor(_lineColor);
+                }
+            }
+        }
+
+        public void SetShapeColor(Color color)
+        {
+            if (Line != null)
+            {
+                Line.Stroke = new SolidColorBrush(color);
+            }
+        }
+
+        private double _strokeThickness = 1.0;
+        [Category("Вид")]
+        [DisplayName("Толщина линии"), Description("Задает толщину линии связи")]
+        public double StrokeThickness
+        {
+            get { return _strokeThickness; }
+            set
+            {
+                if (_strokeThickness != value)
+                {
+                    _strokeThickness = value;
+                    SetBorderThickness(_strokeThickness);
+                }
+            }
+        }
+
+        public void SetBorderThickness(double thickness)
+        {
+            if (Line != null)
+            {
+                Line.StrokeThickness = thickness;
+            }
+        }
+
+        [XmlIgnore]
+        public Brush Fill { get; set; }
+        [XmlIgnore]
+        public Brush Stroke { get; set; }
+        public string Label { get; set; }
+        public Arrow Arrow { get; set; }
+        public Guid NodeFrom { get; set; }
+        public Guid NodeTo { get; set; }
+
+        private Point _startPoint;
+        [Browsable(false)]
+        public Point StartPoint
+        {
+            get { return _startPoint; }
+            set
+            {
+                _startPoint = value;
+                SetStartPoint(_startPoint);
+            }
+        }
+
+        public void SetStartPoint(Point startPoint)
+        {
+            if (Line != null)
+            {
+                Line.X1 = startPoint.X;
+                Line.Y1 = startPoint.Y;
+                SetArrowEnd(ArrowEnds);
+            }
+        }
+
+        private Point _endPoint;
+
+        [Browsable(false)]
+        public Point EndPoint
+        {
+            get { return _endPoint; }
+            set
+            {
+                _endPoint = value;
+                SetEndPoint(_endPoint);
+            }
+        }
+
+        public void SetEndPoint(Point endPoint)
+        {
+            if (Line != null)
+            {
+                Line.X2 = endPoint.X;
+                Line.Y2 = endPoint.Y;
+                SetArrowEnd(ArrowEnds);
+            }
+        }
+
+        public Link()
+        {
+            UId = Guid.NewGuid();
+        }
+
+        [XmlIgnore]
+        public Line Line { get; set; }
+
+        /// <summary>
+        /// Creates a new line
+        /// </summary>
+        /// <returns></returns>
+        public Line CreateLine()
+        {
+            StartArrowCanvas = new Canvas();
+            VirtualCanvas.ContentCanvas.Children.Add(StartArrowCanvas);
+            //Canvas.SetLeft(StartArrowCanvas, StartPoint.X);
+            //Canvas.SetTop(StartArrowCanvas, StartPoint.Y);
+
+            EndArrowCanvas = new Canvas();
+            VirtualCanvas.ContentCanvas.Children.Add(EndArrowCanvas);
+            //Canvas.SetLeft(EndArrowCanvas, EndPoint.X);
+            //Canvas.SetTop(EndArrowCanvas, EndPoint.Y);
+
+            LabelCanvas = new Canvas();
+            TextBlock textBlock = new TextBlock();
+            textBlock.Text = "Line Label";
+            LabelCanvas.Children.Add(textBlock);
+            VirtualCanvas.ContentCanvas.Children.Add(LabelCanvas);
+            //Canvas.SetLeft(LabelCanvas, EndPoint.X);
+            //Canvas.SetTop(LabelCanvas, EndPoint.Y);
+
+            Line = new Line();
+            Line.X1 = StartPoint.X;
+            Line.Y1 = StartPoint.Y;
+            Line.X2 = EndPoint.X;
+            Line.Y2 = EndPoint.Y;
+            Line.StrokeThickness = StrokeThickness;
+            Line.Stroke = new SolidColorBrush(LineColor);
+            Line.Cursor = Cursors.Hand;
+            Line.MouseDown += VirtualCanvas.Link_OnMouseDown;
+            Line.MouseMove += VirtualCanvas.Link_MouseMove;
+            Line.MouseUp += VirtualCanvas.Link_MouseUp;
+            Line.MouseEnter += VirtualCanvas.Link_MouseEnter;
+            Line.MouseLeave += VirtualCanvas.Link_MouseLeave;
+            Line.ContextMenu = CreateContextMenu();
+            ArrowEnds = ArrowEnds.Start;
+            return Line;
+        }
+        
+        private ContextMenu CreateContextMenu()
+        {
+            ContextMenu contextMenu = new ContextMenu();
+
+            //MenuItem cardMenuItem = new MenuItem();
+            //cardMenuItem.Header = "Карты";
+            //cardMenuItem.Click += CardMenuItem_Click;
+            //contextMenu.Items.Add(cardMenuItem);
+
+            //Separator separator = new Separator();
+            //contextMenu.Items.Add(separator);
+
+            MenuItem propMenuItem = new MenuItem();
+            propMenuItem.Header = "Свойства";
+            propMenuItem.Click += PropMenuItem_Click;
+            contextMenu.Items.Add(propMenuItem);
+
+            return contextMenu;
+        }
+
+        private void CardMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            //NodeWindow nodeWindow = new NodeWindow(this);
+            //nodeWindow.Show();
+        }
+
+        private void PropMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Bootstrap.Current.PropertyViewModel.SelectedObject = this;
+        }
+
+        private bool _selected;
+
+        public bool Selected
+        {
+            get { return _selected; }
+            set
+            {
+                _selected = value;
+                ToggleSelection(_selected);
+            }
+        }
+
+        public void ToggleSelection(bool selected)
+        {
+            if (selected)
+            {
+                DropShadowEffect effect = new DropShadowEffect();
+                effect.Opacity = 0.8;
+                effect.ShadowDepth = 3;
+                effect.Direction = 270;
+                Element.Effect = effect;
+            }
+            else
+            {
+                Element.Effect = null;
+            }
+        }
+
+        private UIElement _element;
+
+        [XmlIgnore]
+        public UIElement Element
+        {
+            get { return _element; }
+            set { _element = value; }
+        }
+
+        [XmlIgnore]
+        public VirtualCanvas VirtualCanvas { get; set; }
+
+        public UIElement CreateElement()
+        {
+            if (_element == null)
+            {
+                _element = CreateLine();
+                _element.Uid = UId.ToString("D");
+            }
+            return _element;
+        }
+
+
+        public void DisposeElement()
+        {
+            _element = null;
+        }
+
+        VirtualCanvas _parent;
+        Typeface _typeface;
+        double _fontSize;
+
+        public Size MeasureText(VirtualCanvas parent, string label)
+        {
+            if (_parent != parent)
+            {
+                FontFamily fontFamily = (FontFamily)parent.GetValue(TextBlock.FontFamilyProperty);
+                FontStyle fontStyle = (FontStyle)parent.GetValue(TextBlock.FontStyleProperty);
+                FontWeight fontWeight = (FontWeight)parent.GetValue(TextBlock.FontWeightProperty);
+                FontStretch fontStretch = (FontStretch)parent.GetValue(TextBlock.FontStretchProperty);
+                _fontSize = (double)parent.GetValue(TextBlock.FontSizeProperty);
+                _typeface = new Typeface(fontFamily, fontStyle, fontWeight, fontStretch);
+                _parent = parent;
+            }
+            FormattedText ft = new FormattedText(label, CultureInfo.CurrentUICulture,
+                FlowDirection.LeftToRight, _typeface, _fontSize, Brushes.Black);
+            return new Size(ft.Width, ft.Height);
+        }
+
+    }
+}

@@ -1,0 +1,95 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Windows.Media.Imaging;
+using GraphBuilder.Shell.Models;
+using GraphBuilder.Shell.Properties;
+
+namespace GraphBuilder.Shell.ViewModels
+{
+    public class IconsViewModel : ViewModelBase
+    {
+        private Bootstrap _bootstrap;
+
+        public IconsViewModel(Bootstrap bootstrap)
+        {
+            _bootstrap = bootstrap;
+
+            Folders = AppFile.Default.GetFolders();
+        }
+
+        private List<Thumb> _folders;
+
+        public List<Thumb> Folders
+        {
+            get { return _folders; }
+            set
+            {
+                _folders = value;
+                OnPropertyChanged("Folders");
+            }
+        }
+
+        private Thumb _selectedFolder;
+
+        public Thumb SelectedFolder
+        {
+            get { return _selectedFolder; }
+            set
+            {
+                if (_selectedFolder != value)
+                {
+                    _selectedFolder = value;
+                    OnPropertyChanged("SelectedFolder");
+                    Files = AppFile.Default.EnlistFiles(_selectedFolder.Path);
+                }
+            }
+        }
+
+        private void EnlistImages(FileInfo[] files)
+        {
+            foreach (FileInfo file in files)
+            {
+                Thumb item = new Thumb();
+                item.Name = file.Name;
+                BitmapImage image = new BitmapImage(new Uri(file.FullName));
+                item.Image = image;
+                Images.Add(item);
+            }
+        }
+
+        private Thumb _selectedImage;
+        public Thumb SelectedImage
+        {
+            get { return _selectedImage; }
+            set
+            {
+                _selectedImage = value;
+                OnPropertyChanged("SelectedImage");
+            }
+        }
+
+        private List<Thumb> _categories = new List<Thumb>();
+        public List<Thumb> Categories
+        {
+            get { return _categories; }
+            set
+            {
+                _categories = value;
+                OnPropertyChanged("Categories");
+            }
+        }
+
+        private ObservableCollection<Thumb> _images = new ObservableCollection<Thumb>();
+        public ObservableCollection<Thumb> Images
+        {
+            get { return _images; }
+            set
+            {
+                _images = value;
+                OnPropertyChanged("Images");
+            }
+        }
+    }
+}

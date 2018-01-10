@@ -1,0 +1,195 @@
+﻿<ribbon:RibbonWindow x:Class="GraphBuilder.Shell.MainWindow"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock"
+                      xmlns:views="clr-namespace:GraphBuilder.Shell.Views"
+                      xmlns:vm="clr-namespace:GraphBuilder.Shell.ViewModels"
+                      xmlns:ribbon="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon"
+                      xmlns:shell="clr-namespace:GraphBuilder.Shell"
+                      xmlns:core="clr-namespace:GraphBuilder.Core;assembly=GraphBuilder.Core"
+                      xmlns:models="clr-namespace:GraphBuilder.Shell.Models"
+                      Closing="MainWindow_OnClosing" Loaded="MainWindow_OnLoaded" Unloaded="MainWindow_Unloaded"
+                      Title="GraphBuilder" WindowStartupLocation="CenterScreen" Width="1600" Height="900" WindowState="Maximized"
+                      Icon="pack://application:,,,/Application.ico">
+
+    <Window.Resources>
+
+    </Window.Resources>
+   
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <shell:RibbonUserControl Grid.Row="0" x:Name="RibbonControl" />
+
+        <xcad:DockingManager Grid.Row="1" x:Name="DockingManager" ActiveContent="{Binding ActiveContent, Mode=TwoWay}" DocumentsSource="{Binding Documents}"
+                             AnchorablesSource="{Binding Anchorables}" AllowMixedOrientation="True" Loaded="DockingManager_OnLoaded">
+            
+            <xcad:DockingManager.LayoutUpdateStrategy>
+                <models:LayoutInitializer/>
+            </xcad:DockingManager.LayoutUpdateStrategy>
+            
+            <xcad:DockingManager.Resources>
+                <!--<DataTemplate DataType="{x:Type core:ViewModelBase}">
+                    <views:DocumentView />
+                </DataTemplate>-->
+                <!--<DataTemplate DataType="{x:Type core:ViewModelBase}">
+                    <views:CanvasView />
+                </DataTemplate>-->
+                <!--<DataTemplate DataType="{x:Type core:ViewModelBase}">
+                    <views:CanvasView />
+                </DataTemplate>-->
+                <!--<DataTemplate DataType="{x:Type vm:ImageViewModel}">
+                    <views:IconsView />
+                </DataTemplate>-->
+            </xcad:DockingManager.Resources>
+
+            <xcad:DockingManager.Theme>
+                <xcad:VS2010Theme/>
+            </xcad:DockingManager.Theme>
+
+            <!--<xcad:DockingManager.LayoutItemContainerStyle>
+                <Style TargetType="{x:Type xcad:LayoutItem}" >
+                    <Setter Property="Title" Value="{Binding Model.Title}" />
+                    <Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}" />
+                    <Setter Property="CanClose" Value="{Binding Model.CanClose}" />
+                    <Setter Property="ContentId" Value="{Binding Model.ContentId}"/>
+                </Style>
+            </xcad:DockingManager.LayoutItemContainerStyle>-->
+
+            <xcad:DockingManager.LayoutItemTemplateSelector>
+                <models:PanesTemplateSelector>
+                    <models:PanesTemplateSelector.CanvasViewTemplate>
+                        <DataTemplate>
+                            <ContentPresenter Content="{Binding UserInterface}"  />
+                        </DataTemplate>
+                    </models:PanesTemplateSelector.CanvasViewTemplate>
+
+                    <models:PanesTemplateSelector.ContViewTemplate>
+                        <DataTemplate>
+                            <ContentPresenter Content="{Binding UserInterface}"  />
+                        </DataTemplate>
+                    </models:PanesTemplateSelector.ContViewTemplate>
+
+                </models:PanesTemplateSelector>
+            </xcad:DockingManager.LayoutItemTemplateSelector>
+
+            <xcad:DockingManager.LayoutItemContainerStyleSelector>
+                <models:PanesStyleSelector>
+                    <models:PanesStyleSelector.ContStyle>
+                        <Style TargetType="{x:Type xcad:LayoutAnchorableItem}">
+                            <Setter Property="Title" Value="{Binding Model.Title}" />
+                            <Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}" />
+                            <Setter Property="CanClose" Value="{Binding Model.CanClose}" />
+                            <Setter Property="ContentId" Value="{Binding Model.ContentId}"/>
+                        </Style>
+                    </models:PanesStyleSelector.ContStyle>
+                    <models:PanesStyleSelector.CanvasStyle>
+                        <Style TargetType="{x:Type xcad:LayoutItem}">
+                            <Setter Property="Title" Value="{Binding Model.Title}" />
+                            <Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}" />
+                            <Setter Property="CanClose" Value="{Binding Model.CanClose}" />
+                            <Setter Property="ContentId" Value="{Binding Model.ContentId}"/>
+                        </Style>
+                    </models:PanesStyleSelector.CanvasStyle>
+                </models:PanesStyleSelector>
+            </xcad:DockingManager.LayoutItemContainerStyleSelector>
+
+
+            <!--<xcad:DockingManager.LayoutItemTemplate >
+                <DataTemplate >
+                    <ContentPresenter Content="{Binding UserInterface}"  />
+                </DataTemplate>
+            </xcad:DockingManager.LayoutItemTemplate>-->
+            
+            <xcad:LayoutRoot PropertyChanged="OnLayoutRootPropertyChanged">
+
+                <xcad:LayoutPanel Orientation="Horizontal">
+                    <xcad:LayoutDocumentPaneGroup>
+                        <xcad:LayoutDocumentPane>
+                            
+                        </xcad:LayoutDocumentPane>
+                    </xcad:LayoutDocumentPaneGroup>
+                </xcad:LayoutPanel>
+
+                <xcad:LayoutRoot.LeftSide>
+                    <xcad:LayoutAnchorSide>
+                        <xcad:LayoutAnchorGroup>
+                            <!--<xcad:LayoutAnchorable x:Name="IconsViewTab" Title="Символы" AutoHideWidth="200" AutoHideMinWidth="60" ContentId="IconsViewContent">
+                                <views:IconsView />
+                            </xcad:LayoutAnchorable>
+
+                            <xcad:LayoutAnchorable x:Name="LinksViewTab" Title="Связи" AutoHideWidth="200" AutoHideMinWidth="60" ContentId="LinksViewContent">
+                                <views:LinksView />
+                            </xcad:LayoutAnchorable>-->
+
+                        </xcad:LayoutAnchorGroup>
+                    </xcad:LayoutAnchorSide>
+                </xcad:LayoutRoot.LeftSide>
+
+                <xcad:LayoutRoot.RightSide>
+                    <xcad:LayoutAnchorSide>
+                        <xcad:LayoutAnchorGroup>
+
+                            <!--<xcad:LayoutAnchorable x:Name="ContextViewTab" Title="Context" AutoHideWidth="200" AutoHideMinWidth="60" ContentId="ContextViewContent">
+                                <views:ContextView Height="200" />
+                            </xcad:LayoutAnchorable>
+
+                            <xcad:LayoutAnchorable x:Name="PropertyViewTab" Title="Свойства" AutoHideWidth="200" ContentId="PropertyViewContent">
+                                <views:PropertyView />
+                            </xcad:LayoutAnchorable>-->
+                            
+                        </xcad:LayoutAnchorGroup>
+                    </xcad:LayoutAnchorSide>
+                </xcad:LayoutRoot.RightSide>
+
+                <xcad:LayoutRoot.BottomSide>
+                    <xcad:LayoutAnchorSide>
+                        <xcad:LayoutAnchorGroup>
+                            
+                            <!--<xcad:LayoutAnchorable Title="Атрибуты" AutoHideWidth="200" AutoHideMinWidth="60" IsMaximized="True" IsActive="True" CanAutoHide="True" ContentId="AttributeContent">
+                                <views:PropertyView DataContext="{Binding}" />
+                            </xcad:LayoutAnchorable>-->
+                        </xcad:LayoutAnchorGroup>
+                    </xcad:LayoutAnchorSide>
+                </xcad:LayoutRoot.BottomSide>
+            </xcad:LayoutRoot>
+        </xcad:DockingManager>
+
+        <StatusBar Grid.Row="2">
+            <StatusBarItem HorizontalAlignment="Left" Visibility="{Binding ProgressVisibility}">
+                <Grid Width="14" Height="14" Background="White">
+                    <Grid.OpacityMask>
+                        <VisualBrush Stretch="Uniform" Visual="{DynamicResource appbar_social_engadget}" />
+                    </Grid.OpacityMask>
+                    <Grid.Style>
+                        <Style>
+                            <Style.Triggers>
+                                <EventTrigger RoutedEvent="Image.Loaded">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="(Image.Opacity)" BeginTime="0:0:0" Duration="0:0:0.1" From="1.0" To="0.0" RepeatBehavior="Forever" AutoReverse="True"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+                </Grid>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Left">
+                <StatusBarItem Content="{Binding Path=StatusText, UpdateSourceTrigger=PropertyChanged}" />
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="0,0,10,0" Text="{Binding Path=BlankStatus}" HorizontalAlignment="Center"/>
+                    <TextBlock Margin="0,0,10,0" Text="{Binding Path=PrinterStatus}" HorizontalAlignment="Center"/>
+                    <ProgressBar IsIndeterminate="True" Visibility="{Binding ProgressVisibility}" Width="100"/>
+                </StackPanel>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+    </ribbon:RibbonWindow>

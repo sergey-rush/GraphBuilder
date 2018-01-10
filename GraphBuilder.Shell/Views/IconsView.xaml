@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="GraphBuilder.Shell.Views.IconsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dragDrop="clr-namespace:GraphBuilder.Shell.DragDrop" Background="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <ComboBox Grid.Row="0" ItemsSource="{Binding Folders}" DisplayMemberPath="Alias" SelectedValuePath="Path" SelectedValue="{Binding SelectedFolder}" Height="26"/>
+
+
+        <ListBox Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemsSource="{Binding Files, Mode=TwoWay}" SelectedItem="{Binding SelectedFile}" AllowDrop="True"
+                                  SnapsToDevicePixels="True"
+                                   dragDrop:DragDropHelper.IsDropTarget="True" 
+                          dragDrop:DragDropHelper.IsDragSource="True" dragDrop:DragDropHelper.DragDropTemplate="{StaticResource DragTemplate}" >
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="{Binding Image}" HorizontalAlignment="Center" Height="32" Margin="10"/>
+                        <TextBlock Text="{Binding Alias}" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Vertical"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            
+            
+        </ListBox>
+
+    </Grid>
+</UserControl>

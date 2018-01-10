@@ -1,0 +1,595 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6EA2A430-A4C5-4145-B13E-234934743AEA}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GraphBuilder.Shell</RootNamespace>
+    <AssemblyName>GraphBuilder.Shell</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <PublishUrl>C:\Deploy\Toolkit\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>http://main.zirk.ru/apps/toolkit/</InstallUrl>
+    <ProductName>Toolkit</ProductName>
+    <PublisherName>Росгосцирк</PublisherName>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>index.htm</WebPage>
+    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>B11930359FA9DA182F68D5E8E88A7F8416E93F5E</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Toolkit.Shell_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\Shell.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\Shell.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Application.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Windows.Shell">
+      <HintPath>..\packages\RibbonControlsLibrary.4.0.0\lib\net40\Microsoft.Windows.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="RibbonControlsLibrary">
+      <HintPath>..\packages\RibbonControlsLibrary.4.0.0\lib\net40\RibbonControlsLibrary.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock">
+      <HintPath>..\packages\Extended WPF Toolkit Binaries\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero">
+      <HintPath>..\packages\Extended WPF Toolkit Binaries\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro">
+      <HintPath>..\packages\Extended WPF Toolkit Binaries\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010">
+      <HintPath>..\packages\Extended WPF Toolkit Binaries\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid">
+      <HintPath>..\packages\Extended WPF Toolkit Binaries\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit">
+      <HintPath>..\packages\Extended WPF Toolkit Binaries\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Models\Annotation.cs" />
+    <Compile Include="Models\AppColors.cs" />
+    <Compile Include="Models\BrowseFileEditor.cs" />
+    <Compile Include="Models\CanvasContextMenu.cs" />
+    <Compile Include="Models\CompoundFile.cs" />
+    <Compile Include="Models\LayoutInitializer.cs" />
+    <Content Include="Models\LinkLine.txt" />
+    <Compile Include="Models\LinkFactory.cs" />
+    <Compile Include="Models\PanesStyleSelector.cs" />
+    <Compile Include="Models\PanesTemplateSelector.cs" />
+    <Compile Include="Models\PositionManager.cs" />
+    <Content Include="Models\VirtualCanvasLine.txt" />
+    <Compile Include="ViewModels\GroupDataViewModel.cs" />
+    <Compile Include="ViewModels\ImportViewModel.cs" />
+    <Compile Include="ViewModels\PropertyViewModel.cs" />
+    <Compile Include="ViewModels\WizardViewModel.cs" />
+    <Compile Include="Views\GroupDataView.xaml.cs">
+      <DependentUpon>GroupDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ImportView.xaml.cs">
+      <DependentUpon>ImportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WizardWindow.xaml.cs">
+      <DependentUpon>WizardWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ZoomBox.cs" />
+    <Content Include="Docs\readme.txt" />
+    <Compile Include="DragDrop\DragDropHelper.cs" />
+    <Compile Include="DragDrop\DraggedAdorner.cs" />
+    <Compile Include="DragDrop\InsertionAdorner.cs" />
+    <Compile Include="Models\AppFile.cs" />
+    <Compile Include="Models\AutoScroll.cs" />
+    <Compile Include="Models\Card.cs" />
+    <Compile Include="Models\Document.cs" />
+    <Compile Include="Models\Element.cs" />
+    <Compile Include="Models\ExponentialDoubleAnimation.cs" />
+    <Compile Include="Models\MapZoom.cs" />
+    <Compile Include="Models\Pan.cs" />
+    <Compile Include="Models\RectangleSelectionGesture.cs" />
+    <Compile Include="Models\ScrollInfo.cs" />
+    <Compile Include="Models\SelectionRectVisual.cs" />
+    <Compile Include="Models\VisualChangeEventArgs.cs" />
+    <Compile Include="RibbonUserControl.xaml.cs">
+      <DependentUpon>RibbonUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ApplicationMenuItemData.cs" />
+    <Compile Include="ViewModels\ApplicationSplitMenuItemData.cs" />
+    <Compile Include="ViewModels\ButtonData.cs" />
+    <Compile Include="ViewModels\CanvasViewModel.cs" />
+    <Compile Include="ViewModels\CheckBoxData.cs" />
+    <Compile Include="ViewModels\ComboBoxData.cs" />
+    <Compile Include="ViewModels\ContextualTabGroupData.cs" />
+    <Compile Include="ViewModels\ContextViewModel.cs" />
+    <Compile Include="ViewModels\ControlData.cs" />
+    <Resource Include="Images\selection.png" />
+    <Resource Include="Images\ApplicationMenuIcon.png" />
+    <Resource Include="Images\hand.png" />
+    <Resource Include="Images\paint-brush.png" />
+    <Resource Include="Images\pointer.png" />
+    <Resource Include="Images\NewDocument_32x32.png" />
+    <Resource Include="Images\OpenDocument_32x32.png" />
+    <Resource Include="Images\Save_32x32.png" />
+    <Resource Include="Images\monitor.png" />
+    <Resource Include="Images\link.png" />
+    <Resource Include="Images\node.png" />
+    <Resource Include="Images\ImportMaster.png" />
+    <Resource Include="Images\Exit.png" />
+    <Resource Include="Images\FileData.png" />
+    <Content Include="ViewModels\DocumentViewModelOld.txt" />
+    <Compile Include="ViewModels\GalleryCategoryData.cs" />
+    <Compile Include="ViewModels\GalleryData.cs" />
+    <Compile Include="ViewModels\GalleryItemData.cs" />
+    <Compile Include="ViewModels\GroupData.cs" />
+    <Compile Include="ViewModels\MenuButtonData.cs" />
+    <Compile Include="ViewModels\MenuItemData.cs" />
+    <Compile Include="ViewModels\RadioButtonData.cs" />
+    <Compile Include="ViewModels\RecentDocumentData.cs" />
+    <Compile Include="ViewModels\RibbonData.cs" />
+    <Compile Include="ViewModels\RowColumnCount.cs" />
+    <Compile Include="ViewModels\SemanticTypesViewModel.cs" />
+    <Compile Include="ViewModels\NodeViewModel.cs" />
+    <Compile Include="ViewModels\SemanticTypeViewModel.cs" />
+    <Compile Include="ViewModels\SeparatorData.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="ViewModels\DataTableViewModel.cs" />
+    <Compile Include="ViewModels\SplitButtonData.cs" />
+    <Compile Include="ViewModels\SplitMenuItemData.cs" />
+    <Compile Include="ViewModels\StartPageViewModel.cs" />
+    <Compile Include="ViewModels\ImageViewModel.cs" />
+    <Compile Include="ViewModels\StylesSet.cs" />
+    <Compile Include="ViewModels\TabData.cs" />
+    <Compile Include="ViewModels\TextBoxData.cs" />
+    <Compile Include="ViewModels\ThemeFonts.cs" />
+    <Compile Include="ViewModels\ToggleButtonData.cs" />
+    <Compile Include="ViewModels\ViewModel.cs" />
+    <Compile Include="ViewModels\RibbonMenuModel.cs" />
+    <Compile Include="Views\CanvasView.xaml.cs">
+      <DependentUpon>CanvasView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContextView.xaml.cs">
+      <DependentUpon>ContextView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SemanticTypesWindow.xaml.cs">
+      <DependentUpon>SemanticTypesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ImageWindow.xaml.cs">
+      <DependentUpon>ImageWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PropertyView.xaml.cs">
+      <DependentUpon>PropertyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DataTableWindow.xaml.cs">
+      <DependentUpon>DataTableWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NodeWindow.xaml.cs">
+      <DependentUpon>NodeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StartPageView.xaml.cs">
+      <DependentUpon>StartPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Resources\Application.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Icons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\ZoomBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="RibbonUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CanvasView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ContextView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\GroupDataView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SemanticTypesWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ImageWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PropertyView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\DataTableWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\NodeWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ImportView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\StartPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Resource Include="Resources\StartPageLogo.png" />
+    <SplashScreen Include="Resources\GraphBuilderLogo.png" />
+    <Resource Include="Resources\Userpic.png" />
+    <Resource Include="Images\AlignCenter_16x16.png" />
+    <Resource Include="Images\AlignLeft_16x16.png" />
+    <Resource Include="Images\AlignRight_16x16.png" />
+    <Resource Include="Images\Bold_16x16.png" />
+    <Resource Include="Images\BordersAndShading_16x16.png" />
+    <Resource Include="Images\Borders_16x16.png" />
+    <Resource Include="Images\BottomBorder_16x16.png" />
+    <Resource Include="Images\Bullets_16x16.png" />
+    <Resource Include="Images\ChooseColor_16x16.png" />
+    <Resource Include="Images\ClearFormatting_16x16.png" />
+    <Resource Include="Images\ColorPalette.png" />
+    <Resource Include="Images\Color_16x16.png" />
+    <Resource Include="Images\ConnectionManager_48x48.png" />
+    <Resource Include="Images\Copy_16x16.png" />
+    <Resource Include="Images\Cut_16x16.png" />
+    <Resource Include="Images\DecreaseIndent_16x16.png" />
+    <Resource Include="Images\Default_16x16.png" />
+    <Resource Include="Images\DiagonalDownBorder_16x16.png" />
+    <Resource Include="Images\DiagonalUpBorder_16x16.png" />
+    <Resource Include="Images\Document_16x16.png" />
+    <Resource Include="Images\DownArrow_16x16.png" />
+    <Resource Include="Images\DownArrow_32x32.png" />
+    <Resource Include="Images\DrawTable_16x16.png" />
+    <Resource Include="Images\EditRedo_16x16.png" />
+    <Resource Include="Images\EditUndo_16x16.png" />
+    <Resource Include="Images\Erase_16x16.png" />
+    <Resource Include="Images\Find_16x16.png" />
+    <Resource Include="Images\Find_32x32.png" />
+    <Resource Include="Images\FolderClosed_48x48.png" />
+    <Resource Include="Images\FontColor_16x16.png" />
+    <Resource Include="Images\FontScript_16x16.png" />
+    <Resource Include="Images\Font_16x16.png" />
+    <Resource Include="Images\Font_32x32.png" />
+    <Resource Include="Images\Forecolor_16x16.png" />
+    <Resource Include="Images\FormatPainter_16x16.png" />
+    <Resource Include="Images\GoTo_16x16.png" />
+    <Resource Include="Images\Help_16x16.png" />
+    <Resource Include="Images\Highlight_16x16.png" />
+    <Resource Include="Images\IncreaseIndent_16x16.png" />
+    <Resource Include="Images\InsideBorders_16x16.png" />
+    <Resource Include="Images\InsideHorizontalBorder_16x16.png" />
+    <Resource Include="Images\InsideVerticalBorder_16x16.png" />
+    <Resource Include="Images\Italic_16x16.png" />
+    <Resource Include="Images\Justify_16x16.png" />
+    <Resource Include="Images\LeftArrow_32x32.png" />
+    <Resource Include="Images\LeftBorder_16x16.png" />
+    <Resource Include="Images\LineColor_16x16.png" />
+    <Resource Include="Images\LineSpacing_16x16.png" />
+    <Resource Include="Images\Minus_32x32.png" />
+    <Resource Include="Images\MultilevelList_16x16.png" />
+    <Resource Include="Images\NewPermission_32x32.png" />
+    <Resource Include="Images\NoBorder_16x16.png" />
+    <Resource Include="Images\Numbering_16x16.png" />
+    <Resource Include="Images\Open_16x16.png" />
+    <Resource Include="Images\Options_16x16.png" />
+    <Resource Include="Images\OuterBorders_16x16.png" />
+    <Resource Include="Images\ParagraphSpacing_16x16.png" />
+    <Resource Include="Images\Paragraph_16x16.png" />
+    <Resource Include="Images\Paragraph_32x32.png" />
+    <Resource Include="Images\Paste_16x16.png" />
+    <Resource Include="Images\Paste_32x32.png" />
+    <Resource Include="Images\Plus_32x32.png" />
+    <Resource Include="Images\Printer_48x48.png" />
+    <Resource Include="Images\PrintPreview_16x16.png" />
+    <Resource Include="Images\Print_16x16.png" />
+    <Resource Include="Images\PublishPlan_16x16.png" />
+    <Content Include="Images\README.html" />
+    <Resource Include="Images\RefreshArrow_32x32.png" />
+    <Resource Include="Images\Replace_16x16.png" />
+    <Resource Include="Images\RightArrow_32x32.png" />
+    <Resource Include="Images\RightBorder_16x16.png" />
+    <Resource Include="Images\Save_16x16.png" />
+    <Resource Include="Images\SelectionPane_16x16.png" />
+    <Resource Include="Images\Select_16x16.png" />
+    <Resource Include="Images\SendLinkByEmail_32x32.png" />
+    <Resource Include="Images\Shading_16x16.png" />
+    <Resource Include="Images\ShowGridlines_16x16.png" />
+    <Resource Include="Images\ShowHide_16x16.png" />
+    <Resource Include="Images\Sort_16x16.png" />
+    <Resource Include="Images\StylesGroup.png" />
+    <Resource Include="Images\Styles_32x32.png" />
+    <Resource Include="Images\Table_32x32.png" />
+    <Resource Include="Images\ThemeFonts.png" />
+    <Resource Include="Images\Tick_32x32.png" />
+    <Resource Include="Images\TopBorder_16x16.png" />
+    <Resource Include="Images\UpArrow_16x16.png" />
+    <Resource Include="Images\UpArrow_32x32.png" />
+    <Content Include="SQLite.Interop.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="XceedDocumentation.txt" />
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\ColorToBrushConverter.cs" />
+    <Compile Include="Converters\DateTimeFormatConverter.cs" />
+    <Compile Include="Converters\ScaleToPercentConverter.cs" />
+    <Compile Include="Converters\VisibilityToBooleanConverter.cs" />
+    <Compile Include="Models\NodeFactory.cs" />
+    <Compile Include="Models\Enumerations.cs" />
+    <Compile Include="Models\Thumb.cs" />
+    <Compile Include="Models\Link.cs" />
+    <Compile Include="Models\Node.cs" />
+    <Compile Include="Models\Person.cs" />
+    <Compile Include="Models\Property.cs" />
+    <Compile Include="Models\VirtualCanvas.cs" />
+    <Compile Include="ViewModels\Bootstrap.cs" />
+    <Content Include="ViewModels\DockWindowViewModel.txt" />
+    <Content Include="ViewModels\FileViewModel.txt" />
+    <Compile Include="ViewModels\LinksViewModel.cs" />
+    <Content Include="ViewModels\IconsViewModel.txt" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\DocumentViewModel.cs" />
+    <Compile Include="Views\DocumentView.xaml.cs">
+      <DependentUpon>DocumentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HomeView.xaml.cs">
+      <DependentUpon>HomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LinksView.xaml.cs">
+      <DependentUpon>LinksView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TitleWindow.xaml.cs">
+      <DependentUpon>TitleWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\IconsView.xaml.cs">
+      <DependentUpon>IconsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\DocumentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HomeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LinksView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\WizardWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\TitleWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\IconsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ExceptionHandler.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Docs\Offer.docx" />
+    <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Application.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GraphBuilder.Core\GraphBuilder.Core.csproj">
+      <Project>{c61b4b34-faba-40eb-9ac3-de03127ddc85}</Project>
+      <Name>GraphBuilder.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GraphBuilder.Data\GraphBuilder.Data.csproj">
+      <Project>{c42a9c7c-1c9e-4236-ad21-e1478d11eb3d}</Project>
+      <Name>GraphBuilder.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GraphBuilder.Import\GraphBuilder.Import.csproj">
+      <Project>{6246a063-58fc-49d1-b4c2-4d8ddd7a2add}</Project>
+      <Name>GraphBuilder.Import</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

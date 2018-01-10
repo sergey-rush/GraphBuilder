@@ -1,0 +1,80 @@
+﻿<Window x:Class="GraphBuilder.Shell.Views.NodeWindow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      WindowStartupLocation="CenterScreen" Title="Настройки" Height="600" Width="800"
+                      Icon="pack://application:,,,/Application.ico">
+    <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+        
+            <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" Margin="10,10,10,20">
+            <DockPanel>
+                <GroupBox Header="{Binding Node.Header}" DockPanel.Dock="Top" Margin="10">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding Node.Image}" Height="100" Width="100" HorizontalAlignment="Center" />
+                        <StackPanel Margin="10">
+                            <Label Content="Имя:"/>
+                            <TextBlock Text="{Binding Node.Name}"/>
+                            <Label Content="Инфо:"/>
+                            <TextBlock Text="{Binding Node.Info}" TextWrapping="Wrap"/>
+                        </StackPanel>
+
+                    </StackPanel>
+                </GroupBox>
+
+                <StackPanel DockPanel.Dock="Bottom">
+                    <GroupBox Name="GroupBoxElement" Header="Карты" Margin="10">
+                        <ListView ItemsSource="{Binding Cards, Mode=TwoWay}" SelectedItem="{Binding SelectedCard}" SelectionMode="Single"
+                                  IsSynchronizedWithCurrentItem="True" SnapsToDevicePixels="True"
+                                   BorderThickness="0">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Width="{Binding ActualWidth, ElementName=GroupBoxElement}">
+                                        <TextBlock Text="{Binding Header}" Style="{DynamicResource DescriptionHeaderStyle}" TextWrapping="Wrap"/>
+                                        <Label Content="Инфо:"/>
+                                        <TextBlock Text="{Binding Info}" TextWrapping="Wrap"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Отметка:"/>
+                                            <Label Content="{Binding Score}"/>
+                                            <Label Content="Индех:"/>
+                                            <Label Content="{Binding Index}"/>
+                                        </StackPanel>
+                                        <Label Content="Источник:"/>
+                                        <TextBlock Text="{Binding Source}" TextWrapping="Wrap"/>
+                                        <Label Content="Заключение:"/>
+                                        <TextBlock Text="{Binding Summary}" FontStyle="Italic" TextWrapping="Wrap"/>
+                                        <Label Content="{Binding Date}" ContentStringFormat="dd MMMM yyyy HH:mm" />
+                                        
+                                        <Separator Margin="10" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                        </ListView>
+                    </GroupBox>
+                </StackPanel>
+            </DockPanel>
+        </ScrollViewer>
+
+        <Border Grid.Row="1" BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1" Margin="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Style="{DynamicResource AccentedSquareButtonStyle}" Grid.Column="0" Command="{Binding Path=New}" Margin="20" Height="30" Width="140">Новая</Button>
+                <Button Style="{DynamicResource AccentedSquareButtonStyle}" Grid.Column="1" Command="{Binding Path=Edit}" Margin="20" Height="30" Width="140">Изменить</Button>
+                <Button Style="{DynamicResource AccentedSquareButtonStyle}" Grid.Column="2" Command="{Binding Path=Print}" Margin="20" Height="30" Width="140">Печать</Button>
+                <Button Name="CloseButton" Style="{DynamicResource AccentedSquareButtonStyle}" Grid.Column="3" Click="CloseButton_OnClick" Margin="20" Height="30" Width="140">Закрыть</Button>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

@@ -1,0 +1,68 @@
+﻿using System;
+using System.Linq;
+using System.Windows;
+using System.Windows.Input;
+using GraphBuilder.Core;
+using GraphBuilder.Shell.Common;
+
+namespace GraphBuilder.Shell.ViewModels
+{
+    public class DockWindowViewModel : ViewModelBase
+    {
+        public Guid Id;
+
+        public DockWindowViewModel()
+        {
+            Id = Guid.NewGuid();
+            CanClose = true;
+            IsClosed = false;
+        }
+
+        private ICommand _closeCommand;
+
+        public ICommand CloseCommand
+        {
+            get
+            {
+                if (_closeCommand == null)
+                    _closeCommand = new DelegateCommand(OnClose);
+                return _closeCommand;
+            }
+        }
+
+        public void OnClose()
+        {
+            IsClosed = true;
+        }
+
+        private bool _isClosed;
+
+        public bool IsClosed
+        {
+            get { return _isClosed; }
+            set
+            {
+                if (_isClosed != value)
+                {
+                    _isClosed = value;
+                    OnPropertyChanged("IsClosed");
+                }
+            }
+        }
+
+        private bool _canClose;
+
+        public bool CanClose
+        {
+            get { return _canClose; }
+            set
+            {
+                if (_canClose != value)
+                {
+                    _canClose = value;
+                    OnPropertyChanged("CanClose");
+                }
+            }
+        }
+    }
+}
